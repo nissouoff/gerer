@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>USDT Manager</title>
+  <link rel="stylesheet" href="./public/css/home.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- Modal Overview -->
+<div id="overviewModal" class="modal">
+  <div class="modal-content glass-card" id="overviewContent"></div>
+</div>
+
+
+    <!-- ================= HEADER ================= -->
+    <h1 class="title">💸 USDT Manager</h1>
+
+    <!-- ================= PAGE 1 : AJOUTER ================= -->
+    <section id="page-ajouter" class="page active">
+      <form id="usdtForm" class="glass-card">
+        <!-- Destinataire -->
+        <div class="form-group">
+          <label for="destinataire">Destinataire (optionnel)</label>
+          <input type="text" id="destinataire" placeholder="Nom du destinataire" />
+        </div>
+
+        <!-- Montant -->
+        <div class="form-group">
+          <label for="montant">Montant en USDT *</label>
+          <input type="number" id="montant" placeholder="" required />
+        </div>
+
+         <!-- Prix uniter -->
+        <!-- Prix unitaire -->
+<!-- Prix unitaire -->
+<div class="form-group">
+  <label for="pircxeusdt">Prix de vente DZD *</label>
+  <input type="number" id="prixusdt" placeholder="260DZ" required />
+
+
+
+</div>
+
+
+
+        <!-- État -->
+        <div class="form-group">
+          <label for="etat">📌 État du paiement</label>
+          <select id="etat" required>
+            <option value="payer">✅ Payé</option>
+            <option value="attente">⏳ En attente</option>
+            <option value="nonpayer">❌ Non payé</option>
+          </select>
+        </div>
+
+        <!-- Bouton -->
+        <button type="submit" class="btn-primary">Confirmer</button>
+      </form>
+
+      <!-- Message -->
+      <div id="message"></div>
+    </section>
+
+    <!-- ================= PAGE 2 : CLIENTS ================= -->
+    <section id="page-clients" class="page">
+      <h2>📋 Liste des clients</h2>
+      <div class="table-wrapper">
+        <table id="clientsTable">
+          <thead>
+            <tr>
+              <th>Destinataire</th>
+              <th>Montant (USDT)</th>
+              <th>État</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Rempli via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ================= PAGE 3 : USDT ================= -->
+    <section id="page-depot-usdt" class="page">
+      <form id="usdtdepot" class="glass-card">
+        <!-- Destinataire -->
+        <div class="form-group">
+          <label for="destinataire">Montant USDT</label>
+          <input type="text" id="deppotusdt" placeholder="Montant de depot USDT" />
+        </div>
+
+        <!-- Montant -->
+        <div class="form-group">
+          <label for="montant">Prix de 1usdt en DZ</label>
+          <input type="number" id="usdtdz" placeholder="Ex: 100" required />
+        </div>
+
+
+        <!-- Bouton -->
+        <button type="submit" class="btn-cc">Confirmer</button>
+
+      </form>
+
+      <!-- Message -->
+      <div id="message"></div>
+    </section>
+
+    <!-- ================= PAGE 4 : History Depot ================= -->
+    <section id="page-his-depot" class="page">
+      <h2>📋 Liste des Depot</h2>
+      <div class="table-wrapper">
+        <table id="depotTable">
+          <thead>
+            <tr>
+              <th>Montant USDT</th>
+              <th>PrixUnit</th>
+              <th>DZD</th>
+              
+             
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Rempli via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+<!-- ================= PAGE 5 : DASHBOARD ================= -->
+<section id="page-dashboard" class="page">
+  <h2>📊 Dashboard</h2>
+
+  <!-- Cards -->
+  <div class="dashboard-grid">
+    <div class="glass-card dashboard-card">
+      <h3>Ventes Aujourd'hui</h3>
+      <p><strong id="venteJourUSDT">0</strong> USDT</p>
+      <p><strong id="venteJourDZ">0</strong> DZD</p>
+    </div>
+
+    <div class="glass-card dashboard-card">
+      <h3>Total Mois</h3>
+      <p><strong id="venteMoisUSDT">0</strong> USDT</p>
+      <p><strong id="venteMoisDZ">0</strong> DZD</p>
+    </div>
+
+    <div class="glass-card dashboard-card">
+      <h3>Bénéfices/Depance</h3>
+      <p><strong id="depp-dz">0</strong></p>
+      <p><strong id="benefDZ">0</strong> </p>
+    </div>
+
+    <div class="glass-card dashboard-card">
+      <h3>Vente/Solde</h3>
+      <p>Solde: <strong id="totUSDT">0</strong></p>
+      <p>Vente: <strong id="totVent">0</strong></p>
+    </div>
+  </div>
+
+  <!-- Graph -->
+  <div class="glass-card">
+    <h3>Répartition des ventes</h3>
+    <canvas id="dashboardChart" width="300" height="300"></canvas>
+  </div>
+</section>
+
+
+    
+
+    <!-- ================= NAVIGATION BOTTOM ================= -->
+    <nav class="bottom-nav">
+      <button class="nav-btn active" data-target="page-ajouter">Ajouter</button>
+      <button class="nav-btn" data-target="page-clients">Clients</button>
+      <button class="nav-btn" data-target="page-depot-usdt">Depot</button>
+      <button class="nav-btn" data-target="page-his-depot">History</button>
+      <button class="nav-btn" data-target="page-dashboard">Dashboard</button>
+
+    </nav>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script src="./public/js/in.js"></script>
+</body>
+</html>
