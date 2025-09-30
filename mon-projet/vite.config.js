@@ -6,7 +6,7 @@ export default defineConfig({
     host: "0.0.0.0",
     port: 5173,
     allowedHosts: [
-      ".ngrok-free.app", // autorise tous les sous-domaines ngrok
+      ".onrender.com", // autorise tous les sous-domaines ngrok
     ],
   },
 });
